@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dkore Apps Studio</title>
+  <meta name="description" content="Dkore Apps Studio is a mobile app development studio based in Zürich, Switzerland." />
+  <link rel="icon" type="image/png" href="icon.png" />
+  <style>
+    :root {
+      --bg: #071126;
+      --bg-soft: #0d1d3e;
+      --card: rgba(255,255,255,0.08);
+      --text: #eef4ff;
+      --muted: #bdd1ff;
+      --blue: #1f7cff;
+      --light-blue: #6ed0ff;
+      --red: #ef4335;
+      --orange: #ff8c2a;
+      --white: #ffffff;
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(31,124,255,0.25), transparent 30%),
+        radial-gradient(circle at right, rgba(239,67,53,0.18), transparent 35%),
+        linear-gradient(135deg, #050b18 0%, #09152d 45%, #071126 100%);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(5, 11, 24, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 42px 0 22px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-banner {
+      width: 100%;
+      display: block;
+      max-height: 520px;
+      object-fit: cover;
+      opacity: 0.92;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: clamp(24px, 4vw, 52px);
+      background: linear-gradient(90deg, rgba(5,11,24,0.82) 0%, rgba(5,11,24,0.55) 42%, rgba(5,11,24,0.15) 100%);
+    }
+
+    .hero-copy {
+      max-width: 620px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(110,208,255,0.12);
+      border: 1px solid rgba(110,208,255,0.25);
+      color: #d7f2ff;
+      font-size: 0.88rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .hero-copy p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+    }
+
+    section {
+      padding: 28px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3, .about h2, .contact h2 {
+      margin-top: 0;
+    }
+
+    .card p, .about p, .contact p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .about-contact {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .item {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .item a {
+      color: #bfe7ff;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .grid, .about-contact { grid-template-columns: 1fr; }
+      .hero-overlay {
+        position: relative;
+        background: linear-gradient(180deg, rgba(5,11,24,0.10), rgba(5,11,24,0.92));
+      }
+      .hero-banner { min-height: 340px; }
+    }
+
+    @media (max-width: 640px) {
+      .brand img { width: 48px; height: 48px; }
+      .hero { padding-top: 22px; }
+      .card { padding: 20px; }
+      .nav { justify-content: center; }
+      .buttons { flex-direction: column; align-items: stretch; }
+      .cta, .btn-secondary { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top">
+        <img src="icon.png" alt="Dkore Apps Studio icon" />
+        <div>
+          <strong>Dkore Apps Studio</strong>
+          <span>Digital innovation from Zürich</span>
+        </div>
+      </a>
+      <a class="cta" href="https://www.dkoreappsstudio.com/" target="_blank" rel="noopener">Visit Official Website</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-card">
+        <img class="hero-banner" src="banner.png" alt="Dkore Apps Studio banner" />
+        <div class="hero-overlay">
+          <div class="hero-copy">
+            <div class="eyebrow">Dkore GmbH · Zürich, Switzerland</div>
+            <h1>Modern apps with a premium digital identity.</h1>
+            <p>
+              Dkore Apps Studio creates innovative, secure, and user-friendly mobile experiences with a strong focus on quality, design, and performance.
+            </p>
+            <div class="buttons">
+              <a class="cta" href="#contact">Contact Studio</a>
+              <a class="btn-secondary" href="#about">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container grid">
+        <div class="card">
+          <h3>Creative Design</h3>
+          <p>Stylish interfaces, strong visual branding, and polished details designed to stand out on modern app stores and digital platforms.</p>
+        </div>
+        <div class="card">
+          <h3>Reliable Experience</h3>
+          <p>We focus on clarity, usability, and smooth performance to deliver apps that feel intuitive and professional from the first tap.</p>
+        </div>
+        <div class="card">
+          <h3>Global Vision</h3>
+          <p>Built in Switzerland with an international mindset, Dkore Apps Studio aims to create digital products for users worldwide.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-contact">
+        <div class="card about">
+          <h2>About Dkore Apps Studio</h2>
+          <p>
+            Dkore Apps Studio is the developer identity of <strong>Dkore GmbH</strong>, a Zürich-based organization focused on building modern mobile applications with a clean and professional brand image.
+          </p>
+          <p>
+            Our goal is to combine practical utility with attractive design, delivering apps that are secure, accessible, and enjoyable to use.
+          </p>
+        </div>
+
+        <div class="card contact" id="contact">
+          <h2>Contact</h2>
+          <div class="contact-list">
+            <div class="item">
+              <strong>Company</strong>
+              Dkore GmbH
+            </div>
+            <div class="item">
+              <strong>Address</strong>
+              Arosastrasse 14, Zürich, 8008 Switzerland
+            </div>
+            <div class="item">
+              <strong>Email</strong>
+              <a href="mailto:dkoremedali79@gmail.com">dkoremedali79@gmail.com</a>
+            </div>
+            <div class="item">
+              <strong>Phone</strong>
+              <a href="tel:+33758070326">+33 7 58 07 03 26</a>
+            </div>
+            <div class="item">
+              <strong>Website</strong>
+              <a href="https://www.dkoreappsstudio.com/" target="_blank" rel="noopener">www.dkoreappsstudio.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Dkore Apps Studio · All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
